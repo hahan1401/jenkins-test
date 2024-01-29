@@ -1,0 +1,6 @@
+name: nextjs
+services:
+    jenkins:
+        ports:
+            - 3000:3000
+        image: nextjs-0125
