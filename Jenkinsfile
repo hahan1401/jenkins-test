@@ -4,6 +4,7 @@ pipeline {
     stage ('Docker Build') {
       steps {
         echo "var: ${var}"
+        echo "User: ${$USER}"
         echo "\n================================================================================================================\n"
         git 'https://github.com/hahan1401/nextjs.git'
         // docker compose -f docker-compose.yml build
