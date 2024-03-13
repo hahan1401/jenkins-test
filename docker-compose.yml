@@ -1,6 +1,6 @@
-name: nextjs
+name: jenkin-test
 services:
     jenkins:
         ports:
             - 3000:3000
-        image: nextjs-0125
+        image: jenkin-test
