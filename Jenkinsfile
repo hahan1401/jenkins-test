@@ -3,6 +3,8 @@ pipeline {
   stages {
     stage ('Docker Build') {
       steps {
+        echo "notify: ${notify}"
+        echo "output: ${output}"
         // git 'https://github.com/hahan1401/nextjs.git'
         docker compose -f docker-compose.yml build
         docker compose -f docker-compose.yml up -d
