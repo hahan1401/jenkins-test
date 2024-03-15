@@ -1,28 +1,28 @@
 node {
-  WORKSPACE=/home/user/project
-  DEPLOYMENT_USER=deploy
-  DEPLOYMENT_SERVER=example.com
-  DEPLOYMENT_APP_PATH=/var/www/html/myapp
+  env.DEPLOYMENT_SERVER = '172.31.53.108'
+	env.DEPLOYMENT_USER = 'hahan'
+	env.DEPLOYMENT_APP_PATH = '/fandelo-cms-1'
+	env.WORKING_APP_PATH = '/fandelo-cms-2'
 
   try {
 
     stage ('PreBuild') {
+      echo "var: ${var}"
+      echo "========================================================"
     }
     
     stage ("Build") {
       sh """
-      rsync -az --delete --rsync-path="mkdir -p /file-1 && rsync" --exclude=/.next --exclude=/node_modules /file-2/ hahan@172.31.53.108:/file-1/
-        ssh hahan@172.31.53.108 -p 2022 /bin/bash -ex <<'ENDSSH'
-          docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml up -d
+        rsync -az --delete --rsync-path="mkdir -p ${env.DEPLOYMENT_APP_PATH} && rsync" --exclude=/.next --exclude=/node_modules ${env.WORKSPACE}/ ${env.DEPLOYMENT_USER}@${env.DEPLOYMENT_SERVER}:${env.DEPLOYMENT_APP_PATH}/
+          ssh hahan@172.31.53.108 /bin/bash -ex <<'ENDSSH'
+            docker compose -f docker-compose.yml build
+            docker compose -f docker-compose.yml up -d
 
-          exit
-      """
+            exit
+        """
     }
       
     stage ('PostBuild') {
-      BUILD_FILE.postBuild(this)
-      slackNotify("${SUCCESS_STATUS}", "${environment}", false, "${channel}")
     }
 
   } catch (e) {
