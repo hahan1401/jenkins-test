@@ -13,7 +13,8 @@ node {
     
     stage ("Build") {
       sh """
-        rsync -az --delete --rsync-path="mkdir -p ${env.DEPLOYMENT_APP_PATH} && rsync" --exclude=/.next --exclude=/node_modules ${env.WORKSPACE}/ ${env.DEPLOYMENT_USER}@${env.DEPLOYMENT_SERVER}:${env.DEPLOYMENT_APP_PATH}/
+        rsync -az --delete --exclude=/.next --exclude=/node_modules /var/jenkins_home/workspace/jenkin-test/ \
+        hahan@172.31.53.108:/home/hahan/jenkins-test1/
           ssh hahan@172.31.53.108 /bin/bash -ex <<'ENDSSH'
             docker compose -f docker-compose.yml build
             docker compose -f docker-compose.yml up -d
