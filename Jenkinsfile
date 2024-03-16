@@ -1,8 +1,8 @@
 node {
   env.DEPLOYMENT_SERVER = '172.31.53.108'
 	env.DEPLOYMENT_USER = 'hahan'
-	env.DEPLOYMENT_APP_PATH = '/home/hahan/fandelo/deploy/fandelo-cms-1'
-	env.WORKING_APP_PATH = '/home/fruitful/fandelo/fandelo-cms-2'
+	env.DEPLOYMENT_APP_PATH = '/home/hahan/jenkins-test1'
+	env.WORKING_APP_PATH = '/home/hahan/jenkins-test-2'
 
   try {
 
