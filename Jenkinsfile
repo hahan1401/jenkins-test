@@ -13,7 +13,8 @@ node {
     
     stage ("Build") {
       sh """
-        docker cp ./*:!**/node_modules fb775d5b3c60:var/jenkins_home/workspace/new-folder
+        rsync -az --delete --exclude=/.next --exclude=/node_modules /var/jenkins_home/workspace/jenkin-test/ \
+        hahan@172.31.53.108:/home/hahan/jenkins-test1/
           ssh hahan@172.31.53.108 /bin/bash -ex <<'ENDSSH'
             docker compose -f docker-compose.yml build
             docker compose -f docker-compose.yml up -d

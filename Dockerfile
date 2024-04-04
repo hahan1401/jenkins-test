@@ -1,13 +1,6 @@
 FROM node:18-alpine
-FROM ubuntu:latest
 
 WORKDIR /app
-
-# Update package lists
-RUN apt-get update
-
-# Install rsync
-RUN apt-get install -y rsync
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
