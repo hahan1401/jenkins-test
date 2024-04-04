@@ -1,6 +1,6 @@
 name: jenkin-test
 services:
-    jenkins:
+    app:
         ports:
             - 3000:3000
         image: jenkin-test
